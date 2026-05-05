@@ -1,4 +1,3 @@
-````markdown
 # Assignment 5: Blue-Green Deployment on Kubernetes using AWS ALB Ingress
 
 This project demonstrates a **Blue-Green Deployment strategy** on Kubernetes using the **AWS Load Balancer Controller** and **ALB Ingress weighted routing**.
@@ -15,7 +14,7 @@ Traffic is controlled using AWS ALB weighted target groups through Kubernetes In
 ## Project Structure
 
 ```bash
-Asignment-5/
+Assignment-5/
 ├── k8s/
 │   ├── blue-deployment.yaml
 │   ├── green-deployment.yaml
@@ -25,7 +24,7 @@ Asignment-5/
 │   ├── ingress-rollback-100-blue.yaml
 │   └── namespace.yaml
 └── README.md
-````
+```
 
 ---
 
@@ -33,11 +32,11 @@ Asignment-5/
 
 The objective of this assignment is to:
 
-* Deploy two versions of an application on Kubernetes
-* Expose both versions using Kubernetes Services
-* Configure AWS ALB Ingress
-* Route 100% traffic to the Green version
-* Roll back traffic to the Blue version using weighted routing
+- Deploy two versions of an application on Kubernetes
+- Expose both versions using Kubernetes Services
+- Configure AWS ALB Ingress
+- Route 100% traffic to the Green version
+- Roll back traffic to the Blue version using weighted routing
 
 ---
 
@@ -45,13 +44,13 @@ The objective of this assignment is to:
 
 Before running this project, make sure you have:
 
-* AWS CLI configured
-* kubectl installed
-* eksctl installed
-* An EKS cluster running
-* AWS Load Balancer Controller installed
-* Proper IAM permissions for ALB creation
-* Kubernetes namespace created
+- AWS CLI configured
+- `kubectl` installed
+- `eksctl` installed
+- An EKS cluster running
+- AWS Load Balancer Controller installed
+- Proper IAM permissions for ALB creation
+- Kubernetes namespace created
 
 ---
 
@@ -80,7 +79,7 @@ kubectl apply -f k8s/blue-deployment.yaml
 kubectl apply -f k8s/blue-service.yaml
 ```
 
-Verify:
+Verify the resources:
 
 ```bash
 kubectl get pods -n bluegreen
@@ -98,7 +97,7 @@ kubectl apply -f k8s/green-deployment.yaml
 kubectl apply -f k8s/green-service.yaml
 ```
 
-Verify:
+Verify the resources:
 
 ```bash
 kubectl get pods -n bluegreen
@@ -118,8 +117,8 @@ alb.ingress.kubernetes.io/actions.weighted-routing: >
 
 This configuration sends:
 
-* 0% traffic to Blue
-* 100% traffic to Green
+- 0% traffic to Blue
+- 100% traffic to Green
 
 Apply the ingress:
 
@@ -176,8 +175,8 @@ alb.ingress.kubernetes.io/actions.weighted-routing: >
 
 This rollback configuration sends:
 
-* 100% traffic to Blue
-* 0% traffic to Green
+- 100% traffic to Blue
+- 0% traffic to Green
 
 Apply the rollback ingress:
 
@@ -185,7 +184,7 @@ Apply the rollback ingress:
 kubectl apply -f k8s/ingress-rollback-100-blue.yaml
 ```
 
-Verify:
+Verify the rollback:
 
 ```bash
 kubectl describe ingress bluegreen-ingress -n bluegreen
@@ -240,7 +239,7 @@ kubectl delete -f k8s/blue-deployment.yaml
 kubectl delete namespace bluegreen
 ```
 
-If you applied the Green ingress instead of rollback ingress, delete it using:
+If you applied the Green ingress instead of the rollback ingress, delete it using:
 
 ```bash
 kubectl delete -f k8s/ingress-0-blue-100-green.yaml
@@ -252,18 +251,16 @@ kubectl delete -f k8s/ingress-0-blue-100-green.yaml
 
 This assignment successfully demonstrates:
 
-* Kubernetes Blue-Green Deployment
-* AWS ALB Ingress setup
-* Weighted traffic routing
-* 100% traffic shift to Green
-* Rollback from Green to Blue
+- Kubernetes Blue-Green Deployment
+- AWS ALB Ingress setup
+- Weighted traffic routing
+- 100% traffic shift to Green
+- Rollback from Green to Blue
 
 ---
 
 ## Author
 
 **Name:** Hashim.
-**Assignment:** Kubernetes Blue-Green Deployment using AWS ALB
+**Assignment:** Kubernetes Blue-Green Deployment using AWS ALB  
 **Platform:** AWS EKS
-
-```
