@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-app
+  namespace: bluegreen
+  labels:
+    app: bluegreen-demo
+    version: green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bluegreen-demo
+      version: green
+  template:
+    metadata:
+      labels:
+        app: bluegreen-demo
+        version: green
+    spec:
+      containers:
+        - name: bluegreen-demo
+          image: 277361136380.dkr.ecr.us-east-1.amazonaws.com/bluegreen-demo:v2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APP_VERSION
+              value: "v2"
+            - name: APP_COLOR
+              value: "green"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
