@@ -1,4 +1,3 @@
-````markdown
 # Blue/Green Traffic Shifting Notes
 
 ## Project Context
