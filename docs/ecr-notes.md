@@ -1,4 +1,3 @@
-````markdown
 # AWS ECR Setup & Image Management — Assignment 5
 
 ## Overview
